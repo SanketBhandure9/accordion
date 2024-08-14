@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import AccordionItem from "./components/AccordionItem";
+import data from "./utils/data";
+import "./App.css";
+import { useState } from "react";
 
-function App() {
+const App = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="accordion-item-wrapper">
+      {data.map((item, index) => (
+        <AccordionItem
+          key={item.id}
+          title={item.title}
+          body={item.body}
+          isOpen={index === openIndex}
+          setIsOpen={() => {
+            index === openIndex ? setOpenIndex(null) : setOpenIndex(index);
+          }}
+        />
+      ))}
     </div>
   );
-}
+};
 
 export default App;
